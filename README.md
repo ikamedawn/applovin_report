@@ -8,7 +8,7 @@
 </a>
 
 <a href="https://github.com/ikamedawn/applovin_report/actions">
-    <img src="https://github.com/ikamedawn/applovin_report/actions/workflows/main.yml/badge.svg?branch=release" alt="CI Status">
+    <img src="https://github.com/ikamedawn/applovin_report/actions/workflows/dev.yml/badge.svg" alt="dev">
 </a>
 
 <a href="https://ikamedawn.github.io/applovin_report/">
