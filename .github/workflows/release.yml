@@ -33,7 +33,7 @@ jobs:
 
             -   name: build change log
                 id: build_changelog
-                uses: mikepenz/release-changelog-builder-action@3.7.2
+                uses: mikepenz/release-changelog-builder-action@3.2.0
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
