@@ -1491,7 +1491,7 @@ jeepney = ">=0.6"
 name = "setuptools"
 version = "67.8.0"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
-optional = true
+optional = false
 python-versions = ">=3.7"
 files = [
     {file = "setuptools-67.8.0-py3-none-any.whl", hash = "sha256:5df61bf30bb10c6f756eb19e7c9f3b473051f48db77fddbe06ff2ca307df9a6f"},
@@ -1734,10 +1734,10 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 
 [extras]
 dev = ["pip", "pre-commit", "toml", "tox", "twine", "virtualenv"]
-doc = ["mike", "mkdocs", "mkdocs-autorefs", "mkdocs-include-markdown-plugin", "mkdocs-material", "mkdocstrings"]
+doc = ["mike", "mkdocs", "mkdocs-autorefs", "mkdocs-include-markdown-plugin", "mkdocs-material", "mkdocs-material-extensions", "mkdocstrings"]
 test = ["black", "flake8", "flake8-docstrings", "isort", "pytest", "pytest-cov"]
 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10, <3.12"
-content-hash = "391f1b86f55f8c991003a34da3fcd42bd920151ce0b8bae0476620fc876ebc88"
+content-hash = "9bef01efe4d86881b22ccc1f36a301f5026662affe3bc11c1662db6257110a67"
