@@ -502,6 +502,20 @@ python-dateutil = ">=2.8.1"
 dev = ["flake8", "markdown", "twine", "wheel"]
 
 [[package]]
+name = "griffe"
+version = "0.28.1"
+description = "Signatures for entire Python programs. Extract the structure, the frame, the skeleton of your project, to generate API documentation or find breaking changes in your API."
+optional = true
+python-versions = ">=3.7"
+files = [
+    {file = "griffe-0.28.1-py3-none-any.whl", hash = "sha256:a39fc547c964fcf2c0569834efce4978b7c528ef5a67eb9bdf6d0388ebced5a9"},
+    {file = "griffe-0.28.1.tar.gz", hash = "sha256:2990f97f1e94dcfc444756c3f1350ef78465f6238594a292b0c426ab62c00479"},
+]
+
+[package.dependencies]
+colorama = ">=0.4"
+
+[[package]]
 name = "identify"
 version = "2.5.24"
 description = "File identification library for Python"
@@ -921,6 +935,21 @@ pymdown-extensions = ">=6.3"
 crystal = ["mkdocstrings-crystal (>=0.3.4)"]
 python = ["mkdocstrings-python (>=0.5.2)"]
 python-legacy = ["mkdocstrings-python-legacy (>=0.2.1)"]
+
+[[package]]
+name = "mkdocstrings-python"
+version = "1.0.0"
+description = "A Python handler for mkdocstrings."
+optional = true
+python-versions = ">=3.7"
+files = [
+    {file = "mkdocstrings_python-1.0.0-py3-none-any.whl", hash = "sha256:c59d67009a7a85172f4da990d8523e95606b6a1ff93a22a2351ad3b5f8cafed1"},
+    {file = "mkdocstrings_python-1.0.0.tar.gz", hash = "sha256:b89d849df990204f909d5452548b6936a185f912da06208a93909bebe25d6e67"},
+]
+
+[package.dependencies]
+griffe = ">=0.24"
+mkdocstrings = ">=0.20"
 
 [[package]]
 name = "more-itertools"
@@ -1734,10 +1763,10 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 
 [extras]
 dev = ["pip", "pre-commit", "toml", "tox", "twine", "virtualenv"]
-doc = ["mike", "mkdocs", "mkdocs-autorefs", "mkdocs-include-markdown-plugin", "mkdocs-material", "mkdocs-material-extensions", "mkdocstrings"]
+doc = ["mike", "mkdocs", "mkdocs-autorefs", "mkdocs-include-markdown-plugin", "mkdocs-material", "mkdocs-material-extensions", "mkdocstrings-python"]
 test = ["black", "flake8", "flake8-docstrings", "isort", "pytest", "pytest-cov"]
 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10, <3.12"
-content-hash = "9bef01efe4d86881b22ccc1f36a301f5026662affe3bc11c1662db6257110a67"
+content-hash = "d454d43a059bcc451c2ef00c25e040f847d0f25cdc2119182545a8dd9d78864a"
