@@ -55,6 +55,7 @@ echo "Version bumped from $current_version to $new_version"
 # Create a new tag
 tag_name="v$new_version"
 git commit -am "Bump version to $new_version"
+git push origin
 git tag "$tag_name"
 
 # Push the new tag to the remote repository
