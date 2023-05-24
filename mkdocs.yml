@@ -4,13 +4,10 @@ repo_url: https://github.com/ikamedawn/applovin_report
 repo_name: applovin_report
 #strict: true
 nav:
-    -   home: index.md
-    -   installation: installation.md
-    -   usage: usage.md
-    -   modules: api.md
-    -   contributing: contributing.md
-    -   authors: authors.md
-    -   history: history.md
+    -   Home: index.md
+    -   Installation: installation.md
+    -   Usage: usage.md
+    -   Modules: api.md
 theme:
     name: material
     language: en
@@ -60,12 +57,7 @@ plugins:
     -   mkdocstrings:
             watch:
                 - applovin_report
-    -   mike:
-            alias_type: copy
-            canonical_version: latest
 extra:
-    version:
-        provider: mike
     social:
         -   icon: fontawesome/brands/github
             link: https://github.com/ikamedawn

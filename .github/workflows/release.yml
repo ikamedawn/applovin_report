@@ -62,8 +62,7 @@ jobs:
                     poetry run mkdocs build
                     git config --global user.name Dawn
                     git config --global user.email minhpc@ikameglobal.com
-                    poetry run mike deploy -p -f -u --ignore `poetry version --short` latest
-                    poetry run mike set-default -p `poetry version --short`
+                    poetry run mkdocs gh-deploy --force
 
 
             -   name: Build wheels and source tarball
