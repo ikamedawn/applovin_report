@@ -28,7 +28,7 @@ bump_version() {
 update_version_in_file() {
     local new_version="$1"
 
-    awk -v new_version="$new_version" '/version =/{gsub(/"[^"]+"/, "\"" new_version "\"")}1' pyproject.toml > temp.toml
+    awk -v new_version="$new_version" '/version =/{ if (!found) { gsub(/"[^"]+"/, "\"" new_version "\""); found = 1 } } 1' pyproject.toml > temp.toml
     mv temp.toml pyproject.toml
 }
 
