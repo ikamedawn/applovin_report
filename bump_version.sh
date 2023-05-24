@@ -28,7 +28,8 @@ bump_version() {
 update_version_in_file() {
     local new_version="$1"
 
-    sed -i '' -E "0,/(version = \"[^\"]+\")/ s/(version = \"[^\"]+\")/version = \"$new_version\"/" pyproject.toml
+    awk -v new_version="$new_version" '/version =/{gsub(/"[^"]+"/, "\"" new_version "\"")}1' pyproject.toml > temp.toml
+    mv temp.toml pyproject.toml
 }
 
 if [[ $# -ne 1 ]]; then
