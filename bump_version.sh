@@ -32,7 +32,7 @@ update_version_in_file() {
 }
 
 if [[ $# -ne 1 ]]; then
-    echo "Usage: ./bump_version.sh <segment>"
+    echo "Usage: ./bump_version.sh <patch|minor|major>"
     exit 1
 fi
 
