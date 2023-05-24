@@ -56,6 +56,16 @@ jobs:
                     echo "::set-output name=package_version::`poetry version --short`"
                 shell: bash
 
+            -   name: publish documentation
+                run: |
+                    poetry install -E doc
+                    poetry run mkdocs build
+                    git config --global user.name Dawn
+                    git config --global user.email minhpc@ikameglobal.com
+                    poetry run mike deploy -p -f --ignore `poetry version --short`
+                    poetry run mike set-default -p `poetry version --short`
+
+
             -   name: Build wheels and source tarball
                 run: |
                     poetry lock
