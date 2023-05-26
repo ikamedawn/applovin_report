@@ -1,6 +1,4 @@
-# Installation
-
-## Stable release
+# Stable release
 
 To install applovin-report, run this command in your
 terminal:
@@ -14,7 +12,7 @@ This is the preferred method to install applovin-report, as it will always insta
 If you don't have [pip][] installed, this [Python installation guide][]
 can guide you through the process.
 
-## From source
+# From source
 
 The source for applovin-report can be downloaded from
 the [Github repo][].

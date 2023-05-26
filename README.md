@@ -7,8 +7,7 @@
 
 Applovin Report APIs wrapper
 
-* Documentation: <https://ikamedawn.github.io/applovin_report/>
-
 ## Features
 
-* TODO
+* Revenue Reporting API
+* More APIs are coming soon

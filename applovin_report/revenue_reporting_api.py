@@ -1,19 +1,23 @@
 import time
 import traceback
-from ctypes import Union
 from datetime import datetime, timedelta
+from typing import Iterator
 
-import pandas as pd
 import requests
+from pandas import DataFrame
 
 
 class RevenueReport:
+    """
+    Detailed documentation for this API can be found at: [Revenue Report API](https://dash.applovin.com/documentation/mediation/reporting-api/max-ad-revenue)
+    """
+
     ENDPOINT = "https://r.applovin.com/maxReport"
 
-    def __init__(self, api_key: Union[str, list[str]]):
+    def __init__(self, api_key: str | list[str]):
         """
         Args:
-            api_key: str or list[str]: API key(s) to use for the report
+            api_key: API key(s) to use for the report
 
         Returns:
             None
@@ -32,22 +36,22 @@ class RevenueReport:
         max_retries: int = 3,
         retry_interval: int = 30,
         **kwargs,
-    ):
+    ) -> DataFrame:
         """
         Retrieve a report from the MAX Revenue Report API.
 
 
         Args:
-            start_date: str: YYYY-MM-DD, within the last 45 days
-            end_date: str: YYYY-MM-DD, within the last 45 days
-            columns: list[str]: List of columns to include in the report
-            limit: int: Set the number of rows to return
-            max_retries: int: Set the number of retries
-            retry_interval: int: Set the number of seconds to wait between retries
-            **kwargs: dict: Additional parameters to pass to the API
+            start_date: YYYY-MM-DD, within the last 45 days
+            end_date: YYYY-MM-DD, within the last 45 days
+            columns: List of columns to include in the report
+            limit: Set the number of rows to return
+            max_retries: Set the number of retries
+            retry_interval: Set the number of seconds to wait between retries
+            **kwargs: Additional parameters to pass to the API
 
         Returns:
-            pandas.DataFrame: A pandas DataFrame containing the report data
+            A pandas DataFrame containing the report data
 
         Doc Author:
             minhpc@ikameglobal.com
@@ -70,7 +74,7 @@ class RevenueReport:
             response = requests.get(url=RevenueReport.ENDPOINT, params=params)
 
             if response.status_code == 200:
-                return pd.DataFrame(response.json()["results"])
+                return DataFrame(response.json()["results"])
             else:
                 print(f"Retrying... ({i + 1}/{max_retries})")
                 time.sleep(retry_interval)
@@ -87,19 +91,19 @@ class RevenueReport:
         max_retries: int = 3,
         retry_interval: int = 30,
         **kwargs,
-    ):
+    ) -> Iterator[DataFrame]:
 
         """
         Retrieve a report from the MAX Revenue Report API in batches.
 
         Args:
-            start_date: str: YYYY-MM-DD, within the last 45 days
-            end_date: str: YYYY-MM-DD, within the last 45 days
-            columns: list[str]: List of columns to include in the report
-            batch_size: int: Number of rows to return per batch
-            max_retries: int: Number of retries
-            retry_interval: int: Number of seconds to wait between retries
-            **kwargs: dict: Additional parameters to pass to the API
+            start_date: YYYY-MM-DD, within the last 45 days
+            end_date: YYYY-MM-DD, within the last 45 days
+            columns: List of columns to include in the report
+            batch_size: Number of rows to return per batch
+            max_retries: Number of retries
+            retry_interval: Number of seconds to wait between retries
+            **kwargs: Additional parameters to pass to the API
 
         Returns:
             A generator that yields a pandas DataFrame containing the report data
@@ -134,72 +138,9 @@ class RevenueReport:
                 time.sleep(retry_interval)
             if response.status_code != 200:
                 print(traceback.format_exc())
-                raise Exception(
-                    f"Error: {response.status_code}"
-                    f"Last offset: {offset}"
-                    f"Batch size: {batch_size}"
-                )
+                raise Exception(f"Error: {response.status_code}" f"Last offset: {offset}" f"Batch size: {batch_size}")
 
             results = response.json()["results"]
             has_next_batch = len(results) == batch_size
             offset += batch_size
-            yield pd.DataFrame(results)
-
-
-if __name__ == "__main__":
-    service = RevenueReport()
-    _columns = [
-        "day",
-        "package_name",
-        "platform",
-        "country",
-        "application",
-        "max_ad_unit_test",
-        "max_ad_unit_id",
-        "network",  # bigquery
-        "network_placement",
-        # 'ad_format',  # big_query
-        "attempts",
-        "responses",
-        "fill_rate",
-        "impressions",
-        "estimated_revenue",
-        "ecpm",
-    ]
-
-    total_len = 0
-    df: pd.DataFrame = None
-    start_time = time.time()
-    for df_result in service.get_report_batch(
-        start_date="2023-05-14",
-        end_date="2023-05-16",
-        columns=_columns,
-        batch_size=100000,
-        filter_package_name="com.jura.car.crashes.simulator",
-    ):
-        # Concat to df
-        if df is None:
-            df = df_result
-        else:
-            df = pd.concat([df, df_result], ignore_index=True)
-
-        # Print progress
-        total_len += len(df_result)
-        print(f"Progress: {total_len} rows, {time.time() - start_time:.2f} seconds")
-        # Average speed
-        print(
-            f"Average speed: {total_len / (time.time() - start_time):.2f} rows/second"
-        )
-
-    # In day column, convert YYYY-MM-DD to YYYYMMDD
-    df["day"] = df["day"].apply(lambda x: x.replace("-", ""))
-
-    # Write to csv
-    # df.to_csv('/home/dawn/applovin.csv', index=False, header=True)
-
-    platforms = df["platform"].unique().tolist()
-    platforms = [platform.upper() for platform in platforms]
-
-    dates = df["day"].unique().tolist()
-    print(dates)
-    print(platforms)
+            yield DataFrame(results)
