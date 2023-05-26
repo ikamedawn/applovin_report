@@ -92,7 +92,6 @@ class RevenueReport:
         retry_interval: int = 30,
         **kwargs,
     ) -> Iterator[DataFrame]:
-
         """
         Retrieve a report from the MAX Revenue Report API in batches.
 
@@ -138,7 +137,7 @@ class RevenueReport:
                 time.sleep(retry_interval)
             if response.status_code != 200:
                 print(traceback.format_exc())
-                raise Exception(f"Error: {response.status_code}" f"Last offset: {offset}" f"Batch size: {batch_size}")
+                raise Exception(f"Error: {response.status_code}\nLast offset: {offset}\nBatch size: {batch_size}")
 
             results = response.json()["results"]
             has_next_batch = len(results) == batch_size
