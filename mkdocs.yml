@@ -28,6 +28,7 @@ theme:
         - navigation.tabs
         - navigation.instant
         - navigation.tabs.sticky
+        - content.code.copy
 markdown_extensions:
     -   pymdownx.emoji:
             emoji_index: !!python/name:materialx.emoji.twemoji
