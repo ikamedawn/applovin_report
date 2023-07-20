@@ -11,3 +11,6 @@ Applovin Report APIs wrapper
 
 * Revenue Reporting API
 * More APIs are coming soon
+
+## Run dev
+- Add new dependencies: ` poetry add package_name@version --group dev`

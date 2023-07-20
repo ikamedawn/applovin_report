@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 import pytest
 
-from applovin_report import RevenueReport
+from applovin_report import RevenueReport, UserAdRevenueReport
 
 
 @pytest.fixture
@@ -89,3 +89,8 @@ def test_revenue_report_batch(api_key):
         result = pd.concat([result, x], ignore_index=True)
 
     assert len(result) > 0
+
+
+def test_user_ad_revenue_report(api_key):
+    report = UserAdRevenueReport(api_key=api_key.split(","))
+    result = report.get_report(aggregated=False, store_id="1556609627", platform="ios")

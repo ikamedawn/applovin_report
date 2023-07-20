@@ -77,3 +77,14 @@ for df_result in report.get_report_batch(
     df = pd.concat([df, df_result], ignore_index=True)
 print(df)
 ```
+# User Ad Revenue Reporting API
+
+## Get report in batch
+
+```python
+from applovin_report import UserAdRevenueReport
+def test_user_ad_revenue_report(api_keys: list|str):
+    report = UserAdRevenueReport(api_key=api_keys)
+    result = report.get_report(aggregated=False, store_id="1556609627", platform="ios")
+    return result
+```
