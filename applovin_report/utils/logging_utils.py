@@ -1,5 +1,4 @@
 import logging
-from tabulate import tabulate
 
 
 def logging_basic_config(filename=None):
@@ -10,7 +9,3 @@ def logging_basic_config(filename=None):
         logging.basicConfig(level=logging.INFO, format=format)
 
     logging.getLogger('ethereum_dasm.evmdasm').setLevel(logging.ERROR)
-
-
-def print_dataframe(df):
-    print(tabulate(df, headers='keys', tablefmt='psql'))
